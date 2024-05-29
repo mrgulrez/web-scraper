@@ -2,120 +2,79 @@
 <html>
 <head>
     <title>Extracted Data</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background: #f9f9f9;
-            margin: 5px 0;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-    </style>
-    
-    
-
-    
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8 bg-white shadow-md rounded-lg">
+        <div class="flex flex-col text-center w-full mb-10">
+            <h1 class="text-green-700 sm:text-3xl text-2xl font-bold tracking-widest title-font mb-4">Extracted Data</h1>
+            <h2 class="sm:text-2xl text-xl font-medium title-font text-gray-900 mb-2">Title: <span class="text-gray-700">{{ title }}</span></h2>
+            <h3 class="text-lg text-gray-900 mb-6">URL: <a href="{{ url }}" class="text-indigo-700" target="_blank">{{ url }}</a></h3>
+        </div>
 
-
-
-<body>
-    <div class="container">
-        <h1>Extracted Data</h1>
-        <h2>Title: {{ title }}</h2>
-        <h3>URL: <a href="{{ url }}" target="_blank">{{ url }}</a></h3>
-        <h3>Headings:</h3>
-        <ul>
-            {% for heading in data.headings %}
-            <li>{{ heading }}</li>
-            {% endfor %}
-        </ul>
-
-        
-        <h3>Paragraphs:</h3>
-        <ul>
-            {% for paragraph in data.paragraphs %}
-            <li>{{ paragraph }}</li>
-            {% endfor %}
-        </ul>
-
-
-        <h3>Lists:</h3>
-        {% for list in data.lists %}
-            <ul>
-                {% for item in list %}
-                <li>{{ item }}</li>
+        <div class="mb-10">
+            <h3 class="text-xl font-semibold text-center text-gray-900 mb-4">Headings</h3>
+            <ul class="list-none p-0">
+                {% for heading in data.headings %}
+                <li class="bg-gray-200 my-2 p-2 rounded text-center">{{ heading }}</li>
                 {% endfor %}
             </ul>
-        {% endfor %}
+        </div>
 
+        <div class="mb-10">
+            <h3 class="text-xl font-semibold text-center text-gray-900 mb-4">Paragraphs</h3>
+            <ul class="list-none p-0">
+                {% for paragraph in data.paragraphs %}
+                <li class="bg-gray-200 my-2 p-2 rounded">{{ paragraph }}</li>
+                {% endfor %}
+            </ul>
+        </div>
 
-        <h3 class="text-lg mt-4 mb-2">Images:</h3>
-        <div class="grid grid-cols-2 gap-4">
-            {% for img in data.images %}
-            <img src="{{ img }}" alt="Image" class="rounded-lg">
+        <div class="mb-10">
+            <h3 class="text-xl font-semibold text-center text-gray-900 mb-4">Lists</h3>
+            {% for list in data.lists %}
+            <ul class="list-none p-0">
+                {% for item in list %}
+                <li class="bg-gray-200 my-2 p-2 rounded">{{ item }}</li>
+                {% endfor %}
+            </ul>
             {% endfor %}
         </div>
 
-        <h3>Links:</h3>
-        <ul>
-            {% for link in data.links %}
-            <li><a href="{{ link.href }}" target="_blank">{{ link.text }}</a></li>
-            {% endfor %}
-        </ul>
-
-        <h3>Tables:</h3>
-        {% for table in data.tables %}
-            <table>
-                {% for row in table %}
-                <tr>
-                    {% for cell in row %}
-                    <td>{{ cell }}</td>
-                    {% endfor %}
-                </tr>
+        <div class="mb-10">
+            <h3 class="text-xl font-semibold text-center text-gray-900 mb-4">Images</h3>
+            <div class="grid grid-cols-2 gap-4">
+                {% for img in data.images %}
+                <img src="{{ img }}" alt="Image" class="rounded-lg mx-auto">
                 {% endfor %}
-            </table>
-        {% endfor %}
+            </div>
+        </div>
+
+        <div class="mb-10">
+            <h3 class="text-xl font-semibold text-center text-gray-900 mb-4">Links</h3>
+            <ul class="list-none p-0">
+                {% for link in data.links %}
+                <li class="my-2"><a href="{{ link.href }}" class="text-indigo-700 hover:underline" target="_blank">{{ link.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <h3 class="text-xl font-semibold text-center text-gray-900 mb-4">Tables</h3>
+            {% for table in data.tables %}
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300">
+                    {% for row in table %}
+                    <tr class="border-b">
+                        {% for cell in row %}
+                        <td class="px-4 py-2 border">{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
-
-
-
-
 </html>
