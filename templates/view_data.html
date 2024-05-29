@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Extracted Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+    </style>
+    
+    
+
+    
+</head>
+
+
+
+<body>
+    <div class="container">
+        <h1>Extracted Data</h1>
+        <h2>Title: {{ title }}</h2>
+        <h3>URL: <a href="{{ url }}" target="_blank">{{ url }}</a></h3>
+        <h3>Headings:</h3>
+        <ul>
+            {% for heading in data.headings %}
+            <li>{{ heading }}</li>
+            {% endfor %}
+        </ul>
+
+        
+        <h3>Paragraphs:</h3>
+        <ul>
+            {% for paragraph in data.paragraphs %}
+            <li>{{ paragraph }}</li>
+            {% endfor %}
+        </ul>
+
+
+        <h3>Lists:</h3>
+        {% for list in data.lists %}
+            <ul>
+                {% for item in list %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+
+
+        <h3 class="text-lg mt-4 mb-2">Images:</h3>
+        <div class="grid grid-cols-2 gap-4">
+            {% for img in data.images %}
+            <img src="{{ img }}" alt="Image" class="rounded-lg">
+            {% endfor %}
+        </div>
+
+        <h3>Links:</h3>
+        <ul>
+            {% for link in data.links %}
+            <li><a href="{{ link.href }}" target="_blank">{{ link.text }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <h3>Tables:</h3>
+        {% for table in data.tables %}
+            <table>
+                {% for row in table %}
+                <tr>
+                    {% for cell in row %}
+                    <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+    </div>
+</body>
+
+
+
+
+</html>
